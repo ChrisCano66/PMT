@@ -1,17 +1,23 @@
+// REACT
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
+// REDUX
+import {Provider} from 'react-redux';
+
+// COMPONENTS
+import App from './components/App';
+import store from './Redux/store';
+
+
+// Rendu front-end de l'application
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/** permet de faire appel à Redux sur l'ensemble de l'application */} 
+    <Provider store={store}>
+      {/** appel de l'application en tant que soi */} 
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
