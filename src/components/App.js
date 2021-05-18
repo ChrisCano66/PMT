@@ -5,7 +5,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 // COMPONENT
-import PmtList from './PmtList'
+import PmtList from './PmtList';
+import PmtActionButton from './PmtActionButton';
 
 
 // Class principal de l'application
@@ -18,8 +19,17 @@ class App extends Component {
       <div>
         <h2>Hello</h2>
         <div style={styles.container}>
-          {/** on affiche l'ensemble des listes principales en les "mappant" à partir de la liste passer en props */}
-          { lists.map(list => <PmtList title= {list.title} cards={list.cards}/>)}
+          {/** on affiche l'ensemble des listes principales en les "mappant" (ne pas oublier la key unique) à partir de la liste passer en props */}
+          { lists.map(list => 
+            <PmtList 
+              listID={list.id}
+              key={list.id} 
+              title= {list.title} 
+              cards={list.cards}
+            />
+          )}
+          {/** gestion des bouton d'action ajout et fermeture pour l'ajout d'une liste/carte */}
+          <PmtActionButton list />
         </div>
       </div>
     );
