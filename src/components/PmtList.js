@@ -11,7 +11,7 @@ import PmtActionButton from './PmtActionButton';
 const PmtList = ({title, cards, listID}) => {
     return (
         // détermination de la zone où les objets (cartes d'une liste) pourront être drag and dropper
-        <Droppable doppableId={String(listID)}>
+        <Droppable droppableId={String(listID)}>
             {/** Tout ce qui est dans une zone DnD doit être dans une fonction de rendu donc on met la liste 
              * dans une fonction avec un argument "provided" qui sera passer à la div qui est rendue 
              * ("...provided.droppableProps" pour assurer que l'objet est bien une zone où l'on peut dropper des objet draggable) 

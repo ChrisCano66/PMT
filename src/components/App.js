@@ -1,6 +1,7 @@
 // REACT
 import React, {Component} from 'react';
 import { DragDropContext} from 'react-beautiful-dnd';
+import { sort } from '../Redux/actions'
 // REDUX
 import { connect } from 'react-redux';
 // COMPONENT
@@ -13,9 +14,29 @@ class App extends Component {
 
   // fonction de drag and drop pour les cartes des listes
   // la fonction va permetre de créer le "contexte" (zone) où l'on pourra créer des zones de DnD
-  onDragEnd = () => {
-    // TODO: reordering logic
-  }
+  onDragEnd = (result) => {
+    // récupère les infos de la carte qui est drag (draggableId), l'emplacement d'où elle est drag (source)
+    // et l'emplacement où elle est drop (destination)
+    const { destination, source, draggableId } = result;
+
+    // on vérifie s'il n'y a pas de destination (plus précisément si on veut metttre la carte hors de la zone Droppable)
+    // s'il n'y a pas de destination, on fait un simple return "vide"
+    if (!destination) {
+      return;
+    };
+
+    // s'il y a une destination, on récupère les droppableID, droppableIndex, etc avec sort()
+    // que l'on assigne à la source, la destination et draggableId
+    this.props.dispatch(
+      sort(
+        source.droppableId, 
+        destination.droppableId, 
+        source.Index, 
+        destination.Index, 
+        draggableId
+      )
+    );  
+  };
 
   render() {
     // constante récupérant la liste qui a été transformer en props pour les passer aux props

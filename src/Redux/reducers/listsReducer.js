@@ -68,7 +68,8 @@ const listsReducer = (state = initilaState, action) => {
     // par défaut, retournera le state.
     switch(action.type) {
         
-        case CONSTANTS.ADD_LIST:
+        // cas d'ajout d'une liste
+        case CONSTANTS.ADD_LIST: {
             // on crée une nouvelle liste
             const newList = {
                 id: `list-${listID}`,
@@ -79,8 +80,10 @@ const listsReducer = (state = initilaState, action) => {
             listID += 1;
             // on retourne une array qui contient les listes déjà créées dans le state + la nouvelle
             return [...state, newList];
-        
-        case CONSTANTS.ADD_CARD:
+        }
+
+        // cas d'ajout d'une carte
+        case CONSTANTS.ADD_CARD: {
             // on crée une nouvelle carte
             const newCard = {
                 id: `card-${cardID}`,
@@ -103,7 +106,40 @@ const listsReducer = (state = initilaState, action) => {
             });
             // on retourne le nouvel état
             return newState;
+        }
+        
+        // cas du DnD
+        case CONSTANTS.DRAG_HAPPENED: {
+            // on récupère les ocnstantes d'actions de sort()
+            const {
+                droppableIdStart, 
+                droppableIdEnd, 
+                droppableIndexStart, 
+                droppableIndexEnd, 
+                draggableId
+            } = action.payload;
 
+            // on fait une copie du newState au cas où avant de l'utiliser
+            const newState = [...state];
+
+            // On vérifie que le droppableIdStart est le même que le droppableIdEnd ==> 
+            // nous permmet ainsi de savoir que l'on est dans le même contenaire pour le DnD
+            // sinon c'est que c'est dans des container différents
+            if (droppableIdStart === droppableIdEnd) {
+                // on crée une nouvelle liste qui récupère toute les listes où l'on peut faire le DnD
+                const list = state.find(list => droppableIdStart === list.id);
+                // on crée de nouvelles cartes (celle modifiées) en switchant les ids 
+                // on commence par enlever
+                const card = list.cards.splice(droppableIndexStart, 1);
+                // et on insert 
+                list.cards.splice(droppableIndexEnd, 0, ...card);
+            }
+
+            // on retourne le nouvel état
+            return newState;
+        }
+
+        // cas par défaut
         default:
             return state;
     }
