@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import TextArea from 'react-textarea-autosize';
 // REDUX
 import { connect } from "react-redux";
-import { addList, addCard } from "../Redux/actions";
+import { addList } from "../Redux/actions";
+import { addCard } from "../Redux/actions";
 // MUI
 import { Card, Button } from '@material-ui/core';
 import { Icon } from '@material-ui/core';

@@ -3,59 +3,59 @@
 // Actions
 import { CONSTANTS } from "../actions"
 
-let listID = 2;
-let cardID = 4;
+let listID = 3;
+let cardID = 8;
 
 // contante sous forme d'array permettant l'initialisation de l'état
 const initilaState = [
     {
         // titre de la liste principale / puis son id / puis la liste des items (cards) de la liste principale
         title: "First List", 
-        id: 0, 
+        id: `list-${0}`, 
         cards: [
             {
-                id: 0,
-                text: "Static list"
+                id: `card-${0}`,
+                text: "Static list",
             },
             {
-                id: 1,
-                text: "Static list 2"
+                id: `card-${1}`,
+                text: "Static list 2",
             },
         ]
     },
     {
         title: "Second List", 
-        id: 1, 
+        id: `list-${1}`, 
         cards: [
             {
-                id: 0,
-                text: "Static list 3"
+                id: `card-${2}`,
+                text: "Static list 3",
             },
             {
-                id: 1,
-                text: "Static list 4"
+                id: `card-${3}`,
+                text: "Static list 4",
             },
             {
-                id: 2,
-                text: "Static list 5"
+                id: `card-${4}`,
+                text: "Static list 5",
             },
         ]
     },
     {
         title: "Third List", 
-        id: 2, 
+        id: `list-${2}`, 
         cards: [
             {
-                id: 0,
-                text: "Static list 6"
+                id: `card-${5}`,
+                text: "Static list 6",
             },
             {
-                id: 1,
-                text: "Static list 7"
+                id: `card-${6}`,
+                text: "Static list 7",
             },
             {
-                id: 2,
-                text: "Static list 8"
+                id: `card-${7}`,
+                text: "Static list 8",
             },
         ]
     },
@@ -71,7 +71,7 @@ const listsReducer = (state = initilaState, action) => {
         case CONSTANTS.ADD_LIST:
             // on crée une nouvelle liste
             const newList = {
-                id: listID,
+                id: `list-${listID}`,
                 title: action.payload,
                 cards: [],
             };
@@ -83,7 +83,7 @@ const listsReducer = (state = initilaState, action) => {
         case CONSTANTS.ADD_CARD:
             // on crée une nouvelle carte
             const newCard = {
-                id: cardID,
+                id: `card-${cardID}`,
                 text: action.payload.text,
             };
             // on incrément l'ID pour la prochaine fois

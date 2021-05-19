@@ -1,6 +1,6 @@
 
 // recupération des constantes
-import { CONSTANTS } from '../actions';
+import { CONSTANTS } from '.';
 
 // constate permettant de retourner un objet avec le text (dans listReducer) de la liste
 export const addCard = (listID, text) => {
